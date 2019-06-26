@@ -51,9 +51,9 @@ class Hangman extends Component {
 
   /** generateButtons: return array of letter buttons to render */
   generateButtons() {
-    return "abcdefghijklmnopqrstuvwxyz".split("").map((ltr, index) => (
+    return "abcdefghijklmnopqrstuvwxyz".split("").map(ltr => (
       <button
-        key={index}
+        key={ltr}
         value={ltr}
         onClick={this.handleGuess}
         disabled={this.state.guessed.has(ltr)}
@@ -80,6 +80,7 @@ class Hangman extends Component {
         <p>Wrong Answers Now: {this.state.nWrong}</p>
         <p className='Hangman-word'>{this.guessedWord()}</p>
         {this.state.nWrong >= 6 ? <p className='Hangman-btns'>You Loose!!!</p> : <p className='Hangman-btns'>{this.generateButtons()}</p>}
+        {this.guessedWord().join("") === this.state.answer && <p>You WIN!!!</p>}
         <hr/>
         <button className='restart' onClick={this.restart}>RESTART GAME</button>
       </div>
