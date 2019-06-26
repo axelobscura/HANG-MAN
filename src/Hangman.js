@@ -25,6 +25,7 @@ class Hangman extends Component {
       answer: randomWord()
     };
     this.handleGuess = this.handleGuess.bind(this);
+    this.restart = this.restart.bind(this);
   }
 
   /** guessedWord: show current-state of word:
@@ -62,16 +63,25 @@ class Hangman extends Component {
     ));
   }
 
+  restart(){
+    console.log('restart');
+    this.setState({
+      guessedWrong: 0,
+      nWrong: 0
+    })
+  }
+
   /** render: render game */
   render() {
     return (
       <div className='Hangman'>
         <h1>Hangman</h1>
         <img src={this.props.images[this.state.nWrong]} alt={'wrong - ' + this.state.nWrong + '/6'} />
-        <p>Number Wrong: {this.state.nWrong}</p>
-        <p>{this.state.answer}</p>
+        <p>Wrong Answers: {this.state.nWrong}</p>
         <p className='Hangman-word'>{this.guessedWord()}</p>
         {this.state.nWrong >= 6 ? <p className='Hangman-btns'>You Loose!!!</p> : <p className='Hangman-btns'>{this.generateButtons()}</p>}
+        <hr/>
+        <button className='restart' onClick={this.restart}>RESTART GAME</button>
       </div>
     );
   }
